@@ -37,24 +37,18 @@ data/                          Cleaned, analysis-ready CSVs (star schema — imp
   ├─ dim_sellers.csv           Seller id, location
   ├─ dim_date.csv              Calendar table for time intelligence
   └─ seller_performance_summary.csv   Pre-aggregated: revenue, late rate, revenue-at-risk per seller
-docs/
-  ├─ data_model.md             Star schema + relationship diagram
-  ├─ dax_measures.md           Every DAX measure, ready to paste into Power BI
-  └─ build_guide.md            Page-by-page dashboard build checklist
-screenshots/                   (add your exported dashboard screenshots here before sharing)
-```
+
 
 ## How this was built
 
 1. **Source data**: 9 raw Olist CSVs (orders, items, payments, reviews, customers, products, sellers).
 2. **ETL (Python/pandas)**: parsed timestamps, computed `delay_vs_estimate_days` and `is_late` per order, translated product categories to English, joined reviews to delivery status, and pre-aggregated seller-level performance (`revenue_at_risk` = share of a seller's revenue sitting in late-delivered orders).
 3. **Modeling (Power BI)**: star schema — `dim_orders` as the delivery-performance grain, `fact_order_items` for revenue/category analysis, connected through `order_id`; `dim_date` for time intelligence.
-4. **DAX**: late-delivery rate, revenue-at-risk, review-score delta (late vs. on-time), MoM trend measures — see `docs/dax_measures.md`.
+4. **DAX**: late-delivery rate, revenue-at-risk, review-score delta (late vs. on-time), MoM trend measures 
 
 ## Tools
 
 Python (pandas) for ETL · Power BI Desktop for modeling, DAX, and visualization
 
-## Next steps / how to reproduce
 
-See `docs/build_guide.md` for the exact Power BI Desktop steps — import the `data/` CSVs, paste in the relationships from `docs/data_model.md`, add the measures from `docs/dax_measures.md`, and build the four pages in order.
+
